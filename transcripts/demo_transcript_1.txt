@@ -1,0 +1,18 @@
+
+[Meeting Title: Client Onboarding Sync]
+[Date: Nov 21, 2025]
+[Participants: Alice (Project Manager), Bob (Developer), Carol (Client Success)]
+
+---
+
+Alice: Thanks everyone for joining. First, we need to send the signed contract to the client today. I’ll handle that—I'll email the final contract PDF to client@acme.com by end of day.
+
+Bob: Great. I’ll open a Jira ticket for the onboarding dashboard issue we discussed last week. I’ll tag it under project ONB and assign it to myself for implementation by Monday.
+
+Carol: Perfect. Let’s set up a follow-up meeting next Wednesday at 10 a.m. to review the dashboard progress and confirm the client’s access setup.
+
+Alice: Awesome, that sounds good. Once I’ve sent the contract, I’ll add the confirmation to our shared drive.
+
+---
+
+[End of Meeting Transcript]
