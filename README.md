@@ -1,5 +1,7 @@
 # IBM-Hackathon
-
+A FastAPI backend (main.py) was built to connect securely with IBM Watsonx.ai, using environment variables stored in a .env file for the API key, endpoint, and project ID.
+The parser processes meeting transcripts and extracts structured actions, decisions, and tasks in JSON format, validated against the meeting_action_schema.json.
+This forms the core logic that allows the Autonomous Chief of Staff system to interpret meeting discussions and convert them into actionable workflow items ready for orchestration and automation.
 This project uses environment variables to securely connect with IBM Watsonx.ai.
 All sensitive credentials are stored in a .env file and should never be committed to GitHub.
 
@@ -69,3 +71,111 @@ project/
 ├─ openapi/
 │  └─ nlp_parser_openapi.yaml    # API specification
 └─ README.md
+
+Example:
+Schema
+{
+  "meeting_id": "demo-001",
+  "transcript": "[Meeting Title: Client Onboarding Sync]\n[Date: Nov 21, 2025]\n[Participants: Alice (Project Manager), Bob (Developer), Carol (Client Success)]\n\n---\n\nAlice: Thanks everyone for joining. First, we need to send the signed contract to the client today. I’ll handle that—I'll email the final contract PDF to client@acme.com by end of day.\n\nBob: Great. I’ll open a Jira ticket for the onboarding dashboard issue we discussed last week. I’ll tag it under project ONB and assign it to myself for implementation by Monday.\n\nCarol: Perfect. Let’s set up a follow-up meeting next Wednesday at 10 a.m. to review the dashboard progress and confirm the client’s access setup.\n\nAlice: Awesome, that sounds good. Once I’ve sent the contract, I’ll add the confirmation to our shared drive.\n\n---\n\n[End of Meeting Transcript]"
+}
+
+Response
+{
+  "meeting_id": "Client Onboarding Sync",
+  "source_text": "[Meeting Title: Client Onboarding Sync]\n[Date: Nov 21, 2025]\n[Participants: Alice (Project Manager), Bob (Developer), Carol (Client Success)]\n\n---\nAlice: Thanks everyone for joining. First, we need to send the signed contract to the client today. I’ll handle that—I'll email the final contract PDF to client@acme.com by end of day.\n\nBob: Great. I’ll open a Jira ticket for the onboarding dashboard issue we discussed last week. I’ll tag it under project ONB and assign it to myself for implementation by Monday.\n\nCarol: Perfect. Let’s set up a follow-up meeting next Wednesday at 10 a.m. to review the dashboard progress and confirm the client’s access setup.\n\nAlice: Awesome, that sounds good. Once I’ve sent the contract, I’ll add the confirmation to our shared drive.\n\n---\n[End of Meeting Transcript]",
+  "generated_at": "2025-11-21T00:00:00",
+  "actions": [
+    {
+      "id": "action-1",
+      "text": "Send signed contract to client",
+      "type": "action",
+      "confidence": 0.9,
+      "assignees": [
+        {
+          "name": "Alice",
+          "email": "",
+          "role": "Project Manager"
+        }
+      ],
+      "due_date": "2025-11-21",
+      "priority": "high",
+      "source_span": {
+        "start_char": 174,
+        "end_char": 243,
+        "speaker": "Alice"
+      },
+      "context": "Thanks everyone for joining. First, we need to send the signed contract to the client today.",
+      "tags": [],
+      "metadata": {}
+    },
+    {
+      "id": "action-2",
+      "text": "Open Jira ticket for onboarding dashboard issue",
+      "type": "action",
+      "confidence": 0.8,
+      "assignees": [
+        {
+          "name": "Bob",
+          "email": "",
+          "role": "Developer"
+        }
+      ],
+      "due_date": "2025-11-25",
+      "priority": "medium",
+      "source_span": {
+        "start_char": 291,
+        "end_char": 394,
+        "speaker": "Bob"
+      },
+      "context": "Great. I’ll open a Jira ticket for the onboarding dashboard issue we discussed last week.",
+      "tags": [],
+      "metadata": {}
+    },
+    {
+      "id": "action-3",
+      "text": "Set up follow-up meeting",
+      "type": "action",
+      "confidence": 0.7,
+      "assignees": [
+        {
+          "name": "Carol",
+          "email": "",
+          "role": "Client Success"
+        }
+      ],
+      "due_date": "2025-11-27",
+      "priority": "low",
+      "source_span": {
+        "start_char": 432,
+        "end_char": 494,
+        "speaker": "Carol"
+      },
+      "context": "Perfect. Let’s set up a follow-up meeting next Wednesday at 10 a.m.",
+      "tags": [],
+      "metadata": {}
+    },
+    {
+      "id": "action-4",
+      "text": "Add contract confirmation to shared drive",
+      "type": "action",
+      "confidence": 0.6,
+      "assignees": [
+        {
+          "name": "Alice",
+          "email": "",
+          "role": "Project Manager"
+        }
+      ],
+      "due_date": "2025-11-21",
+      "priority": "low",
+      "source_span": {
+        "start_char": 522,
+        "end_char": 559,
+        "speaker": "Alice"
+      },
+      "context": "Awesome, that sounds good. Once I’ve sent the contract, I’ll add the confirmation to our shared drive.",
+      "tags": [],
+      "metadata": {}
+    }
+  ]
+}
