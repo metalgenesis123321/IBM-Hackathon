@@ -1,0 +1,64 @@
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pdb
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+*.manifest
+*.spec
+*.log
+*.pot
+
+# ---- Virtual Environments ----
+venv/
+frontend/venv/
+311venv/
+.env/
+.env.bak/
+.env.local/
+
+# ---- Jupyter & VSCode ----
+.ipynb_checkpoints
+.vscode/
+*.code-workspace
+
+# ---- OS-specific ----
+.DS_Store
+Thumbs.db
+ehthumbs.db
+
+# ---- Frontend / HTML / Static ----
+node_modules/
+*.cache/
+*.log
+frontend/__pycache__/
+frontend/static/
+frontend/dist/
+frontend/build/
+
+# ---- Temporary / Test / Data ----
+*.tmp
+*.bak
+*.swp
+*.swo
+*.orig
+*.log
+*.sqlite3
+*.db
+
+# ---- Environment & credentials ----
+*.env
+.env.*
+secrets.json
+credentials.json
+
+# ---- Transcripts & Generated NLP Data ----
+transcripts/*.json
+transcripts/*.txt
+nlp-parser/__pycache__/
+nlp-parser/temp/
